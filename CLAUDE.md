@@ -67,15 +67,15 @@ From the `Kotlin_project/` directory, Gradle CLI commands:
 
 MVVM with Jetpack Compose. No persistence — state is in-memory only. Package root: `com.example.academytest2026`.
 
-**Planned source layout:**
+**Source layout:**
 ```
 model/
   Item.kt                    — immutable data class
 ui/
   ItemsListViewModel.kt      — single source of truth (ViewModel)
-  ContentScreen.kt           — root screen, owns the ViewModel
+  ContentScreen.kt           — root screen, owns the ViewModel (pending)
   ItemsListScreen.kt         — LazyColumn list with swipe-to-delete
-  ItemDetailScreen.kt        — detail view
+  ItemDetailScreen.kt        — detail view (pending)
   AddItemSheet.kt            — ModalBottomSheet for adding items
   ItemRow.kt                 — single list row composable
   FavoriteButton.kt          — reusable star toggle composable
@@ -105,6 +105,7 @@ ui/
 All declared in `Kotlin_project/gradle/libs.versions.toml` and referenced in `Kotlin_project/app/build.gradle.kts`:
 - Compose BOM `2026.02.01` (manages all `androidx.compose.*` versions)
 - `material3`, `material3-adaptive`, `material3-adaptive-layout`, `material3-adaptive-navigation`
+- `material-icons-core` (required for `Icons.Filled.*` and `Icons.Outlined.*`)
 - `lifecycle-viewmodel-compose:2.8.7`
 - `navigation-compose:2.8.5`
 - `activity-compose`
