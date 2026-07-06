@@ -6,9 +6,27 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 
 ## Screenshots
 
-| List | Add Item | Detail | Empty State |
-|---|---|---|---|
-| ![Item list](assets/ItemListScreen.png) | ![Add item](assets/AddItemSheet.png) | ![Item detail](assets/ItemDetailScreen.png) | ![Empty state](assets/ItemListEmpty.png) |
+Each screen shown as **iOS (SwiftUI) → Android (Compose)**:
+
+**Item List**
+| iOS | Android |
+|---|---|
+| ![Item list iOS](assets/iOS/ItemListScreenSwift.png) | ![Item list Android](assets/android/ItemListScreen.png) |
+
+**Add Item**
+| iOS | Android |
+|---|---|
+| ![Add item iOS](assets/iOS/AddItemSheetSwift.png) | ![Add item Android](assets/android/AddItemSheet.png) |
+
+**Item Detail**
+| iOS | Android |
+|---|---|
+| ![Item detail iOS](assets/iOS/ItemDetailScreenSwift.png) | ![Item detail Android](assets/android/ItemDetailScreen.png) |
+
+**Empty State**
+| iOS | Android |
+|---|---|
+| ![Empty state iOS](assets/iOS/ItemListEmptySwift.png) | ![Empty state Android](assets/android/ItemListEmpty.png) |
 
 ---
 
