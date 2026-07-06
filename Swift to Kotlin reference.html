@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift → Kotlin Reference</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: #6e6e73;
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #d2d2d7;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #6e6e73;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .code-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .code-block {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .code-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            letter-spacing: 0.04em;
+        }
+
+        .code-label.swift { background: #f05138; color: white; }
+        .code-label.kotlin { background: #7f52ff; color: white; }
+
+        pre {
+            background: #1c1c1e;
+            color: #e5e5ea;
+            padding: 0.85rem 1rem;
+            font-size: 0.82rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+            overflow-x: auto;
+            line-height: 1.55;
+        }
+
+        .note {
+            background: #f0f4ff;
+            border-left: 3px solid #0071e3;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 1rem;
+            font-size: 0.88rem;
+            color: #1d1d1f;
+            margin-top: 0.75rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.6rem 1rem;
+            background: #f5f5f7;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #6e6e73;
+        }
+
+        td {
+            padding: 0.6rem 1rem;
+            border-top: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        td code, th code {
+            background: #f0f0f0;
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 0.85em;
+        }
+
+        .swift-col { color: #f05138; font-weight: 500; }
+        .kotlin-col { color: #7f52ff; font-weight: 500; }
+
+        @media (max-width: 700px) {
+            .code-pair { grid-template-columns: 1fr; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Swift → Kotlin Reference</h1>
+<p class="subtitle">A practical translation guide for this Android rewrite exercise.</p>
+
+<!-- VARIABLES -->
+<h2>Variables & Constants</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>let name: String = "Lupo"
+var isFavorite: Bool = false</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>val name: String = "Lupo"
+var isFavorite: Boolean = false</pre>
+        </div>
+    </div>
+    <div class="note"><code>let</code> → <code>val</code> (immutable), <code>var</code> → <code>var</code> (same). <code>Bool</code> → <code>Boolean</code>.</div>
+</div>
+
+<!-- STRING INTERPOLATION -->
+<h2>String Interpolation</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>"Hello \(name)"</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>"Hello $name"</pre>
+        </div>
+    </div>
+</div>
+
+<!-- CLASSES & DATA TYPES -->
+<h2>Classes & Data Types</h2>
+<div class="card">
+    <div class="card-title">Reference type (class)</div>
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>final class ItemViewModel: Identifiable {
+    let id: UUID
+    var name: String
+    var isFavorite: Bool
+}</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>class ItemViewModel : ViewModel() {
+    // extends Android's ViewModel
+}</pre>
+        </div>
+    </div>
+    <div class="note">Swift uses <code>final class</code> for reference types. Kotlin has no <code>struct</code> — use <code>data class</code> for plain data models.</div>
+</div>
+
+<div class="card">
+    <div class="card-title">Value type / plain model</div>
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>struct Item {
+    let id: UUID
+    var name: String
+    var isFavorite: Bool
+}</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>data class Item(
+    val id: UUID = UUID.randomUUID(),
+    val name: String,
+    val isFavorite: Boolean
+)</pre>
+        </div>
+    </div>
+    <div class="note"><code>data class</code> auto-generates <code>equals()</code>, <code>hashCode()</code>, <code>copy()</code> — similar to Swift's <code>Equatable</code> conformance on structs.</div>
+</div>
+
+<!-- OPTIONALS -->
+<h2>Optionals / Nullables</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>var selectedItem: Item? = nil
+
+if let item = selectedItem {
+    print(item.name)
+}
+
+let name = selectedItem?.name ?? "None"</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>var selectedItem: Item? = null
+
+selectedItem?.let { item ->
+    println(item.name)
+}
+
+val name = selectedItem?.name ?: "None"</pre>
+        </div>
+    </div>
+    <div class="note"><code>if let</code> → <code>?.let { }</code>. The nil-coalescing operator <code>??</code> → Elvis operator <code>?:</code>.</div>
+</div>
+
+<!-- CLOSURES / LAMBDAS -->
+<h2>Closures & Lambdas</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>items.sorted { $0.name < $1.name }
+
+items.filter { $0.isFavorite }
+
+items.map { $0.name }</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>items.sortedBy { it.name }
+
+items.filter { it.isFavorite }
+
+items.map { it.name }</pre>
+        </div>
+    </div>
+    <div class="note">Swift's <code>$0</code> shorthand → Kotlin's <code>it</code> for single-parameter lambdas.</div>
+</div>
+
+<!-- PROTOCOLS / INTERFACES -->
+<h2>Protocols → Interfaces</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>protocol Identifiable {
+    var id: UUID { get }
+}
+
+class Item: Identifiable, Hashable {
+    let id = UUID()
+}</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>interface Identifiable {
+    val id: UUID
+}
+
+class Item : Identifiable, Hashable {
+    override val id = UUID.randomUUID()
+}</pre>
+        </div>
+    </div>
+</div>
+
+<!-- STATE MANAGEMENT -->
+<h2>State Management (@Observable → ViewModel)</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>@Observable
+final class ItemsListViewModel {
+    private(set) var items: [Item] = []
+
+    func addItem(named name: String) {
+        items.append(Item(name: name))
+    }
+}</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>class ItemsListViewModel : ViewModel() {
+    private val _items = mutableStateListOf&lt;Item&gt;()
+    val items: List&lt;Item&gt; get() = _items
+
+    fun addItem(name: String) {
+        _items.add(Item(name = name))
+    }
+}</pre>
+        </div>
+    </div>
+    <div class="note">Swift mutates objects in place (<code>@Observable</code> reference types). Kotlin uses immutable <code>data class</code> — to update, replace the item in the list using <code>copy()</code>: <code>_items[index] = item.copy(isFavorite = true)</code>.</div>
+</div>
+
+<!-- SWIFTUI → COMPOSE -->
+<h2>SwiftUI → Jetpack Compose UI Components</h2>
+<div class="card">
+    <table>
+        <tr>
+            <th>SwiftUI</th>
+            <th>Jetpack Compose</th>
+        </tr>
+        <tr>
+            <td><code>@State</code></td>
+            <td><code>remember { mutableStateOf() }</code></td>
+        </tr>
+        <tr>
+            <td><code>@Bindable</code> (two-way binding)</td>
+            <td>State hoisting: pass <code>value</code> + <code>onValueChange</code> lambda</td>
+        </tr>
+        <tr>
+            <td><code>NavigationSplitView</code></td>
+            <td><code>NavigationSuiteScaffold</code> (adaptive) or <code>NavHost</code></td>
+        </tr>
+        <tr>
+            <td><code>List</code> + <code>.onDelete</code></td>
+            <td><code>LazyColumn</code> + <code>SwipeToDismissBox</code></td>
+        </tr>
+        <tr>
+            <td><code>.sheet(item:)</code></td>
+            <td><code>ModalBottomSheet</code> gated by a <code>Boolean</code> state</td>
+        </tr>
+        <tr>
+            <td><code>Form</code> / <code>Section</code></td>
+            <td><code>Column</code> with manual grouping</td>
+        </tr>
+        <tr>
+            <td><code>ContentUnavailableView</code></td>
+            <td>Custom empty-state composable</td>
+        </tr>
+        <tr>
+            <td><code>ToolbarItem</code></td>
+            <td><code>TopAppBar(actions = { ... })</code></td>
+        </tr>
+        <tr>
+            <td><code>@Environment(\.dismiss)</code></td>
+            <td><code>navController.popBackStack()</code> or dismiss lambda</td>
+        </tr>
+        <tr>
+            <td><code>#Preview</code></td>
+            <td><code>@Preview(showBackground = true)</code></td>
+        </tr>
+        <tr>
+            <td><code>Image(systemName:)</code></td>
+            <td><code>Icon(Icons.Default.StarBorder, ...)</code></td>
+        </tr>
+        <tr>
+            <td><code>.navigationTitle()</code></td>
+            <td><code>TopAppBar(title = { Text("...") })</code></td>
+        </tr>
+    </table>
+</div>
+
+<!-- PREVIEWS -->
+<h2>Previews</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>#Preview {
+    ContentView()
+}</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>@Preview(showBackground = true)
+@Composable
+fun ContentScreenPreview() {
+    AcademyTestTheme {
+        ContentScreen()
+    }
+}</pre>
+        </div>
+    </div>
+    <div class="note">Always wrap Compose previews in your app's theme composable so colors and typography render correctly.</div>
+</div>
+
+<!-- UUID -->
+<h2>UUID</h2>
+<div class="card">
+    <div class="code-pair">
+        <div class="code-block">
+            <div class="code-label swift">Swift</div>
+            <pre>let id = UUID()</pre>
+        </div>
+        <div class="code-block">
+            <div class="code-label kotlin">Kotlin</div>
+            <pre>val id: UUID = UUID.randomUUID()</pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
