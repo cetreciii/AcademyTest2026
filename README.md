@@ -103,8 +103,11 @@ AcademyTest2026/
 
 ### Android — Android Studio
 
-1. Open the `Kotlin_project/` folder in Android Studio.
-2. Let Gradle sync, select a device (API 26+), press `Shift+F10`.
+1. **Open the project** — in Android Studio choose *File → Open* and select the `Kotlin_project/` folder (not the repo root). Wait for the Gradle sync to complete.
+2. **Set up a device** — either connect a physical Android device (API 26 / Android 8.0 or higher) via USB with developer mode enabled, or create an emulator via *Device Manager → Create Virtual Device*.
+3. **Run** — select your device from the toolbar dropdown and press the green **Run** button (or `Shift+F10`). The app will build, install, and launch automatically.
+
+**Previews (no device needed):** Almost every composable file ships with one or more `@Preview` functions — `ItemRow`, `FavoriteButton`, `AddItemSheet`, `ItemsListScreen`, `ItemDetailScreen`, and `ContentScreen` all have previews. Open any of these files in Android Studio and click **Split** or **Design** in the top-right corner of the editor to render them instantly without a running device.
 
 **Or build from the terminal** (inside `Kotlin_project/`):
 
