@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repository contains the **reference SwiftUI app** for a job application exercise. The task is to rewrite it as an equivalent **Android app in Kotlin + Jetpack Compose**, preserving identical functionality, including Previews. The Android project should live in this same repository.
 
+## Branch strategy
+
+- `develop` — default working branch. All feature branches are cut from here and merged back via PR.
+- `production` — stable branch. Only receives PRs from `develop`. Both branches are protected (direct pushes blocked).
+
+New work should always be done on a feature branch off `develop`, then submitted as a PR targeting `develop`.
+
 ## SwiftUI source app
 
 ### Build & Run
