@@ -9,13 +9,16 @@
       --bg: #f5f5f7;
       --card: #ffffff;
       --accent: #3ddc84;
-      --accent-dark: #2bb36d;
       --text: #1d1d1f;
       --muted: #6e6e73;
       --border: #e0e0e5;
       --code-bg: #f0f0f5;
       --tag-kotlin: #7f52ff;
       --tag-swift: #f05138;
+      --branch-1: #3ddc84;
+      --branch-2: #0a84ff;
+      --branch-3: #ff9f0a;
+      --branch-4: #ff453a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,29 +28,54 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 2rem 1rem;
     }
 
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
+    /* ── Tab navigation ── */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245, 245, 247, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.75rem 1rem;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
+    .tab-btn {
+      padding: 0.45rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-family: inherit;
     }
+
+    .tab-btn:hover { color: var(--text); background: var(--card); border-color: var(--border); }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ── Pages ── */
+    .page { display: none; padding: 2rem 1rem 3rem; }
+    .page.active { display: block; }
+
+    .container { max-width: 880px; margin: 0 auto; }
+
+    /* ── Shared: header ── */
+    header { text-align: center; margin-bottom: 3rem; }
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    header p { color: var(--muted); font-size: 1rem; }
 
     .badge {
       display: inline-block;
@@ -58,11 +86,10 @@
       color: #fff;
       margin: 0 0.2rem;
     }
-
     .badge.kotlin { background: var(--tag-kotlin); }
     .badge.swift  { background: var(--tag-swift); }
 
-    /* Section headings */
+    /* ── Shared: headings ── */
     h2 {
       font-size: 1.3rem;
       font-weight: 700;
@@ -81,7 +108,7 @@
       color: var(--text);
     }
 
-    /* Cards */
+    /* ── Shared: cards ── */
     .card {
       background: var(--card);
       border-radius: 12px;
@@ -89,22 +116,11 @@
       padding: 1.5rem;
       margin-bottom: 1rem;
     }
+    .card p, .card li { color: var(--muted); font-size: 0.95rem; }
+    .card ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+    .card ul li { margin-bottom: 0.25rem; }
 
-    .card p, .card li {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .card ul {
-      padding-left: 1.2rem;
-      margin-top: 0.4rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.25rem;
-    }
-
-    /* Code blocks */
+    /* ── Shared: code ── */
     pre {
       background: var(--code-bg);
       border-radius: 8px;
@@ -114,6 +130,7 @@
       font-family: "SF Mono", "Fira Code", Consolas, monospace;
       margin: 0.8rem 0;
       border: 1px solid var(--border);
+      line-height: 1.6;
     }
 
     code {
@@ -124,7 +141,7 @@
       border-radius: 4px;
     }
 
-    /* Comparison table */
+    /* ── Shared: tables ── */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -152,19 +169,11 @@
     }
 
     tr:last-child td { border-bottom: none; }
-
     td:first-child { color: var(--text); font-weight: 500; }
+    td code, th code { font-size: 0.82em; }
 
-    td code, th code {
-      font-size: 0.82em;
-    }
-
-    /* Step list */
-    .steps {
-      counter-reset: step;
-      list-style: none;
-      padding: 0;
-    }
+    /* ── Shared: step list ── */
+    .steps { counter-reset: step; list-style: none; padding: 0; }
 
     .steps li {
       counter-increment: step;
@@ -197,18 +206,10 @@
       flex: 1;
     }
 
-    .steps li .step-body strong {
-      display: block;
-      font-size: 0.95rem;
-      margin-bottom: 0.2rem;
-    }
+    .steps li .step-body strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .steps li .step-body span { font-size: 0.88rem; color: var(--muted); }
 
-    .steps li .step-body span {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    /* Data flow diagram */
+    /* ── Shared: data flow ── */
     .flow {
       background: var(--card);
       border: 1px solid var(--border);
@@ -222,16 +223,14 @@
       line-height: 1.7;
     }
 
-    /* Key concepts */
+    /* ── Shared: concept grid ── */
     .concept-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
     }
 
-    @media (max-width: 600px) {
-      .concept-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 600px) { .concept-grid { grid-template-columns: 1fr; } }
 
     .concept-card {
       background: var(--card);
@@ -248,79 +247,230 @@
       margin-bottom: 0.4rem;
     }
 
-    .concept-card .label.swift { color: var(--tag-swift); }
+    .concept-card .label.swift  { color: var(--tag-swift); }
     .concept-card .label.kotlin { color: var(--tag-kotlin); }
+    .concept-card p { font-size: 0.88rem; color: var(--muted); }
 
-    .concept-card p {
-      font-size: 0.88rem;
+    /* ── Page 2: branch headers ── */
+    .branch { margin-bottom: 3rem; }
+
+    .branch-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .branch-number {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .b1 { background: var(--branch-1); }
+    .b2 { background: var(--branch-2); }
+    .b3 { background: var(--branch-3); }
+    .b4 { background: var(--branch-4); }
+
+    .branch-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .branch-header code {
+      font-size: 0.95rem;
+      background: var(--code-bg);
+      padding: 0.2em 0.5em;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Page 2: file cards ── */
+    .file-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .file-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--code-bg);
+    }
+
+    .file-header .filename {
+      font-family: "SF Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--tag-kotlin);
+    }
+
+    .file-header .swift-source {
+      font-size: 0.78rem;
       color: var(--muted);
+      margin-left: auto;
+    }
+
+    .file-header .swift-source span {
+      font-family: "SF Mono", "Fira Code", Consolas, monospace;
+      background: #fff3f0;
+      color: #f05138;
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      border: 1px solid #f9c9bf;
+    }
+
+    .file-body { padding: 1.1rem 1.2rem; }
+    .file-body p { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.8rem; }
+
+    .file-body table {
+      font-size: 0.88rem;
+      border-radius: 8px;
+    }
+
+    .file-body th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      padding: 0.4rem 0.6rem;
+    }
+
+    .file-body td { padding: 0.45rem 0.6rem; font-size: 0.88rem; }
+
+    /* ── Page 2: tags ── */
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15em 0.5em;
+      border-radius: 999px;
+      margin-left: 0.4rem;
+    }
+
+    .tag-preview { background: #e8f8ef; color: #1a7a46; border: 1px solid #b3e8c8; }
+    .tag-noui    { background: #efefff; color: #4444cc; border: 1px solid #c5c5f5; }
+    .tag-logic   { background: #fff8e8; color: #8a6000; border: 1px solid #f0d890; }
+
+    /* ── Page 2: git flow ── */
+    .git-flow {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      font-family: "SF Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.83rem;
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .git-flow .cmd     { color: #a6e3a1; }
+    .git-flow .comment { color: #6c7086; }
+
+    /* ── Shared: divider & note ── */
+    .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+
+    .note {
+      background: #fffbea;
+      border: 1px solid #f0d890;
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.88rem;
+      color: #6b5000;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <h1>Android Implementation Plan</h1>
-    <p>Porting the AcademyTest app from <span class="badge swift">SwiftUI</span> to <span class="badge kotlin">Jetpack Compose</span></p>
-  </header>
+  <!-- ── Tab bar ── -->
+  <nav class="tab-bar">
+    <button class="tab-btn active" onclick="showPage('overview')">Overview</button>
+    <button class="tab-btn" onclick="showPage('branches')">Branch Plan</button>
+  </nav>
 
-  <!-- ── App Overview ── -->
-  <h2>🗂 App Overview</h2>
-  <div class="card">
-    <p>A simple item management app. Displays a sorted list of items (animals with emojis), each with a <strong>name</strong> and a <strong>favorite flag</strong>. Users can add, delete, and toggle favorites. Selecting an item opens a detail view. The UI is in Italian.</p>
-    <ul style="margin-top: 0.8rem;">
-      <li>No persistence — state is in-memory only</li>
-      <li>Sorted alphabetically (case-insensitive), tiebroken by insertion order</li>
-      <li>Architecture: MVVM</li>
-    </ul>
-  </div>
+  <!-- ════════════════════════════════════════════ -->
+  <!-- PAGE 1 — Overview                           -->
+  <!-- ════════════════════════════════════════════ -->
+  <div id="page-overview" class="page active">
+  <div class="container">
 
-  <!-- ── Data Model ── -->
-  <h2>📦 Data Model</h2>
+    <header>
+      <h1>Android Implementation Plan</h1>
+      <p>Porting the AcademyTest app from <span class="badge swift">SwiftUI</span> to <span class="badge kotlin">Jetpack Compose</span></p>
+    </header>
 
-  <h3>Swift — <code>ItemViewModel.swift</code></h3>
-  <div class="card">
-    <p>A <strong>mutable reference type</strong> (<code>@Observable class</code>). Views observe it directly and react when <code>name</code> or <code>isFavorite</code> changes.</p>
-    <pre>@Observable final class ItemViewModel: Identifiable, Hashable {
+    <!-- App Overview -->
+    <h2>🗂 App Overview</h2>
+    <div class="card">
+      <p>A simple item management app. Displays a sorted list of items (animals with emojis), each with a <strong>name</strong> and a <strong>favorite flag</strong>. Users can add, delete, and toggle favorites. Selecting an item opens a detail view. The UI is in Italian.</p>
+      <ul style="margin-top: 0.8rem;">
+        <li>No persistence — state is in-memory only</li>
+        <li>Sorted alphabetically (case-insensitive), tiebroken by insertion order</li>
+        <li>Architecture: MVVM</li>
+      </ul>
+    </div>
+
+    <!-- Data Model -->
+    <h2>📦 Data Model</h2>
+
+    <h3>Swift — <code>ItemViewModel.swift</code></h3>
+    <div class="card">
+      <p>A <strong>mutable reference type</strong> (<code>@Observable class</code>). Views observe it directly and react when <code>name</code> or <code>isFavorite</code> changes.</p>
+      <pre>@Observable final class ItemViewModel: Identifiable, Hashable {
     let id: UUID
     let creationIndex: Int   // insertion-order tiebreaker
     var name: String
     var isFavorite: Bool
 }</pre>
-  </div>
+    </div>
 
-  <h3>Kotlin — <code>Item.kt</code></h3>
-  <div class="card">
-    <p>An <strong>immutable data class</strong>. Never mutate it directly — replace it in the list with <code>item.copy(...)</code>.</p>
-    <pre>data class Item(
+    <h3>Kotlin — <code>Item.kt</code></h3>
+    <div class="card">
+      <p>An <strong>immutable data class</strong>. Never mutate it directly — replace it in the list with <code>item.copy(...)</code>.</p>
+      <pre>data class Item(
     val id: UUID = UUID.randomUUID(),
     val creationIndex: Int,
     val name: String,
     val isFavorite: Boolean
 )</pre>
-  </div>
+    </div>
 
-  <!-- ── Business Logic ── -->
-  <h2>⚙️ Business Logic</h2>
+    <!-- Business Logic -->
+    <h2>⚙️ Business Logic</h2>
 
-  <h3>Swift — <code>ItemsListViewModel.swift</code></h3>
-  <table>
-    <tr><th>Property / Method</th><th>Purpose</th></tr>
-    <tr><td><code>items</code></td><td>The full mutable list of items</td></tr>
-    <tr><td><code>selectedItemID</code></td><td>UUID of the currently selected item</td></tr>
-    <tr><td><code>nextCreationIndex</code></td><td>Auto-increments on each add</td></tr>
-    <tr><td><code>sortedItems</code></td><td>Computed — alphabetical, tiebreak by <code>creationIndex</code></td></tr>
-    <tr><td><code>selectedItem</code></td><td>Computed — looks up item by <code>selectedItemID</code></td></tr>
-    <tr><td><code>addItem(named:)</code></td><td>Trims whitespace, appends, increments index</td></tr>
-    <tr><td><code>deleteItems(atOffsets:)</code></td><td>Swipe-to-delete using sorted index positions</td></tr>
-    <tr><td><code>deleteFromDetail(_:)</code></td><td>Deletes item and clears <code>selectedItemID</code></td></tr>
-  </table>
+    <h3>Swift — <code>ItemsListViewModel.swift</code></h3>
+    <table>
+      <tr><th>Property / Method</th><th>Purpose</th></tr>
+      <tr><td><code>items</code></td><td>The full mutable list of items</td></tr>
+      <tr><td><code>selectedItemID</code></td><td>UUID of the currently selected item</td></tr>
+      <tr><td><code>nextCreationIndex</code></td><td>Auto-increments on each add</td></tr>
+      <tr><td><code>sortedItems</code></td><td>Computed — alphabetical, tiebreak by <code>creationIndex</code></td></tr>
+      <tr><td><code>selectedItem</code></td><td>Computed — looks up item by <code>selectedItemID</code></td></tr>
+      <tr><td><code>addItem(named:)</code></td><td>Trims whitespace, appends, increments index</td></tr>
+      <tr><td><code>deleteItems(atOffsets:)</code></td><td>Swipe-to-delete using sorted index positions</td></tr>
+      <tr><td><code>deleteFromDetail(_:)</code></td><td>Deletes item and clears <code>selectedItemID</code></td></tr>
+    </table>
 
-  <h3>Kotlin — <code>ItemsListViewModel.kt</code></h3>
-  <div class="card">
-    <p>Extends <code>ViewModel()</code>. Uses <code>mutableStateListOf&lt;Item&gt;()</code> so Compose recomposes automatically on list changes. Toggle favorite is an explicit method (since data classes are immutable).</p>
-    <pre>class ItemsListViewModel : ViewModel() {
+    <h3>Kotlin — <code>ItemsListViewModel.kt</code></h3>
+    <div class="card">
+      <p>Extends <code>ViewModel()</code>. Uses <code>mutableStateListOf&lt;Item&gt;()</code> so Compose recomposes automatically on list changes. Toggle favorite is an explicit method (since data classes are immutable).</p>
+      <pre>class ItemsListViewModel : ViewModel() {
     val items = mutableStateListOf&lt;Item&gt;()
     var selectedItemId: UUID? by mutableStateOf(null)
 
@@ -334,121 +484,86 @@
     fun deleteItems(ids: Set&lt;UUID&gt;) { ... }
     fun deleteFromDetail(item: Item) { items.remove(item); selectedItemId = null }
 }</pre>
-  </div>
-
-  <h3>Swift — <code>AddItemViewModel.swift</code> → Kotlin local state</h3>
-  <div class="card">
-    <p>Ephemeral — lives only while the add sheet is open. In Kotlin, use <code>remember { mutableStateOf("") }</code> inside the sheet composable instead of a separate ViewModel class.</p>
-    <ul>
-      <li><code>name</code> — the text field value</li>
-      <li><code>trimmedName</code> — whitespace stripped</li>
-      <li><code>canSave</code> — true when <code>trimmedName</code> is not empty</li>
-    </ul>
-  </div>
-
-  <!-- ── Views / Screens ── -->
-  <h2>🖼 Views → Screens</h2>
-
-  <table>
-    <tr>
-      <th>SwiftUI File</th>
-      <th>Kotlin/Compose Equivalent</th>
-      <th>Key Translation</th>
-    </tr>
-    <tr>
-      <td><code>ContentView.swift</code></td>
-      <td><code>ContentScreen.kt</code></td>
-      <td><code>NavigationSplitView</code> → <code>NavigationSuiteScaffold</code> (adaptive)</td>
-    </tr>
-    <tr>
-      <td><code>ItemsListView.swift</code></td>
-      <td><code>ItemsListScreen.kt</code></td>
-      <td><code>List + .onDelete</code> → <code>LazyColumn + SwipeToDismissBox</code></td>
-    </tr>
-    <tr>
-      <td><code>ItemDetailView.swift</code></td>
-      <td><code>ItemDetailScreen.kt</code></td>
-      <td><code>Form / Section</code> → <code>Column</code> with <code>TopAppBar</code></td>
-    </tr>
-    <tr>
-      <td><code>AddItemView.swift</code></td>
-      <td><code>AddItemSheet.kt</code></td>
-      <td><code>.sheet + NavigationStack</code> → <code>ModalBottomSheet</code></td>
-    </tr>
-    <tr>
-      <td><code>ItemRowView.swift</code></td>
-      <td><code>ItemRow.kt</code></td>
-      <td><code>HStack + VStack</code> → <code>Row + Column</code></td>
-    </tr>
-    <tr>
-      <td><code>FavoriteButton.swift</code></td>
-      <td><code>FavoriteButton.kt</code></td>
-      <td><code>@Binding var isFavorite</code> → <code>isFavorite: Boolean, onClick: () -> Unit</code></td>
-    </tr>
-  </table>
-
-  <!-- ── Key Concept Translations ── -->
-  <h2>🔄 Key Concept Translations</h2>
-
-  <div class="concept-grid">
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>@Observable class</code> — mutable reference type, views observe changes automatically</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>data class</code> + <code>mutableStateListOf</code> — immutable value, replace in list to trigger recompose</p>
     </div>
 
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>@Binding var isFavorite: Bool</code> — two-way binding, child can write back to parent</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>isFavorite: Boolean, onToggle: () -> Unit</code> — state hoisting: value flows down, events flow up</p>
-    </div>
-
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>@Environment(\.dismiss)</code> — auto-injected dismiss action</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>onDismiss: () -> Unit</code> lambda — passed explicitly from the parent</p>
+    <h3>Swift — <code>AddItemViewModel.swift</code> → Kotlin local state</h3>
+    <div class="card">
+      <p>Ephemeral — lives only while the add sheet is open. In Kotlin, use <code>remember { mutableStateOf("") }</code> inside the sheet composable instead of a separate ViewModel class.</p>
+      <ul>
+        <li><code>name</code> — the text field value</li>
+        <li><code>trimmedName</code> — whitespace stripped</li>
+        <li><code>canSave</code> — true when <code>trimmedName</code> is not empty</li>
+      </ul>
     </div>
 
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>NavigationSplitView</code> — adaptive list+detail on iPad, stack on iPhone</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>NavigationSuiteScaffold</code> — same adaptive behavior on tablet vs phone</p>
+    <!-- Views → Screens -->
+    <h2>🖼 Views → Screens</h2>
+    <table>
+      <tr><th>SwiftUI File</th><th>Kotlin/Compose Equivalent</th><th>Key Translation</th></tr>
+      <tr><td><code>ContentView.swift</code></td><td><code>ContentScreen.kt</code></td><td><code>NavigationSplitView</code> → <code>NavigationSuiteScaffold</code> (adaptive)</td></tr>
+      <tr><td><code>ItemsListView.swift</code></td><td><code>ItemsListScreen.kt</code></td><td><code>List + .onDelete</code> → <code>LazyColumn + SwipeToDismissBox</code></td></tr>
+      <tr><td><code>ItemDetailView.swift</code></td><td><code>ItemDetailScreen.kt</code></td><td><code>Form / Section</code> → <code>Column</code> with <code>TopAppBar</code></td></tr>
+      <tr><td><code>AddItemView.swift</code></td><td><code>AddItemSheet.kt</code></td><td><code>.sheet + NavigationStack</code> → <code>ModalBottomSheet</code></td></tr>
+      <tr><td><code>ItemRowView.swift</code></td><td><code>ItemRow.kt</code></td><td><code>HStack + VStack</code> → <code>Row + Column</code></td></tr>
+      <tr><td><code>FavoriteButton.swift</code></td><td><code>FavoriteButton.kt</code></td><td><code>@Binding var isFavorite</code> → <code>isFavorite: Boolean, onClick: () -> Unit</code></td></tr>
+    </table>
+
+    <!-- Key Concept Translations -->
+    <h2>🔄 Key Concept Translations</h2>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>@Observable class</code> — mutable reference type, views observe changes automatically</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>data class</code> + <code>mutableStateListOf</code> — immutable value, replace in list to trigger recompose</p>
+      </div>
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>@Binding var isFavorite: Bool</code> — two-way binding, child can write back to parent</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>isFavorite: Boolean, onToggle: () -> Unit</code> — state hoisting: value flows down, events flow up</p>
+      </div>
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>@Environment(\.dismiss)</code> — auto-injected dismiss action</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>onDismiss: () -> Unit</code> lambda — passed explicitly from the parent</p>
+      </div>
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>NavigationSplitView</code> — adaptive list+detail on iPad, stack on iPhone</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>NavigationSuiteScaffold</code> — same adaptive behavior on tablet vs phone</p>
+      </div>
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>.sheet(item:)</code> — shows a sheet when a value is non-nil</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>if (showSheet) { ModalBottomSheet(...) }</code> — gated by a Boolean state</p>
+      </div>
+      <div class="concept-card">
+        <div class="label swift">Swift</div>
+        <p><code>#Preview</code> — live preview in Xcode canvas</p>
+      </div>
+      <div class="concept-card">
+        <div class="label kotlin">Kotlin</div>
+        <p><code>@Preview(showBackground = true)</code> — live preview in Android Studio</p>
+      </div>
     </div>
 
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>.sheet(item:)</code> — shows a sheet when a value is non-nil</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>if (showSheet) { ModalBottomSheet(...) }</code> — gated by a Boolean state</p>
-    </div>
-
-    <div class="concept-card">
-      <div class="label swift">Swift</div>
-      <p><code>#Preview</code> — live preview in Xcode canvas</p>
-    </div>
-    <div class="concept-card">
-      <div class="label kotlin">Kotlin</div>
-      <p><code>@Preview(showBackground = true)</code> — live preview in Android Studio</p>
-    </div>
-  </div>
-
-  <!-- ── Data Flow ── -->
-  <h2>🔁 Data Flow</h2>
-  <div class="flow">ItemsListViewModel  (single source of truth)
+    <!-- Data Flow -->
+    <h2>🔁 Data Flow</h2>
+    <div class="flow">ItemsListViewModel  (single source of truth)
        │
        ├── ContentScreen
        │       ├── ItemsListScreen
@@ -459,151 +574,404 @@
        │       └── ItemDetailScreen
        │               ├── FavoriteButton (calls toggleFavorite up)
        │               └── Delete button  (calls deleteFromDetail up)</div>
-  <div class="card" style="margin-top: 0.75rem;">
-    <p>Every mutation flows <strong>upward</strong> to the ViewModel via a lambda callback. This is identical in spirit to SwiftUI's <code>@Bindable</code>, just made explicit. No child composable writes state directly.</p>
+    <div class="card" style="margin-top: 0.75rem;">
+      <p>Every mutation flows <strong>upward</strong> to the ViewModel via a lambda callback. This is identical in spirit to SwiftUI's <code>@Bindable</code>, just made explicit. No child composable writes state directly.</p>
+    </div>
+
+    <!-- Phase 1 -->
+    <h2>🛠 Phase 1 — Project Setup</h2>
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <strong>Add the Kotlin plugin</strong>
+          <span>Add <code>alias(libs.plugins.kotlin.compose)</code> to both <code>build.gradle.kts</code> files and declare it in <code>libs.versions.toml</code>.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Enable Compose in app/build.gradle.kts</strong>
+          <span>Add <code>buildFeatures { compose = true }</code> inside the <code>android { }</code> block.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Add all Compose dependencies to libs.versions.toml</strong>
+          <span>Compose BOM, <code>material3</code>, <code>material3-adaptive</code>, <code>lifecycle-viewmodel-compose</code>, <code>navigation-compose</code>, <code>activity-compose</code>.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Sync Gradle and verify the project builds clean</strong>
+          <span>In Android Studio: <strong>File → Sync Project with Gradle Files</strong>. Fix any version conflicts before writing any code.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Verify MainActivity uses Compose</strong>
+          <span>Confirm <code>setContent { }</code> is present — the Compose entry point. This is where <code>ContentScreen</code> will be called in the final branch.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Create the package folder structure</strong>
+          <span>Inside <code>app/src/main/java/com/example/academytest2026/</code>, create <code>model/</code> for data classes and <code>ui/</code> for all composables and ViewModels.</span>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Branch Strategy -->
+    <h2>🌿 Branch Strategy</h2>
+    <div class="card">
+      <p>All development follows a <strong>feature branch → PR → develop</strong> workflow. Each branch represents a meaningful, reviewable unit of work — grouped by screen or responsibility, not by individual file.</p>
+      <ul style="margin-top: 0.8rem;">
+        <li><code>production</code> — stable, never commit directly</li>
+        <li><code>develop</code> — integration branch, all PRs target here</li>
+        <li><code>feature/xxx</code> — your working branch, one per task, short-lived</li>
+      </ul>
+    </div>
+
+    <table>
+      <tr><th>Branch</th><th>Files</th><th>Why grouped together</th></tr>
+      <tr>
+        <td><code>feature/data-model</code></td>
+        <td><code>Item.kt</code>, <code>ItemsListViewModel.kt</code></td>
+        <td>Pure logic, no UI. Everything else depends on this.</td>
+      </tr>
+      <tr>
+        <td><code>feature/items-list-screen</code></td>
+        <td><code>FavoriteButton.kt</code>, <code>ItemRow.kt</code>, <code>AddItemSheet.kt</code>, <code>ItemsListScreen.kt</code></td>
+        <td>All components that make up the list screen.</td>
+      </tr>
+      <tr>
+        <td><code>feature/item-detail-screen</code></td>
+        <td><code>ItemDetailScreen.kt</code></td>
+        <td>Self-contained detail view.</td>
+      </tr>
+      <tr>
+        <td><code>feature/navigation</code></td>
+        <td><code>ContentScreen.kt</code>, updated <code>MainActivity.kt</code></td>
+        <td>Wires all screens together. Last to be built.</td>
+      </tr>
+    </table>
+
+    <div class="card" style="text-align:center; padding: 1.2rem;">
+      <p>For the detailed breakdown of every file, property, and method in each branch →</p>
+      <button class="tab-btn" style="margin-top: 0.8rem; background: var(--accent); color: #fff; border-color: var(--accent);" onclick="showPage('branches')">Open Branch Plan →</button>
+    </div>
+
+  </div>
   </div>
 
-  <!-- ── Project Setup ── -->
-  <h2>🛠 Phase 1 — Project Setup (before writing any code)</h2>
-  <ol class="steps">
-    <li>
-      <div class="step-body">
-        <strong>Add the Kotlin plugin</strong>
-        <span>The generated project is missing it. Add <code>alias(libs.plugins.kotlin.android)</code> to both <code>build.gradle.kts</code> files and declare it in <code>libs.versions.toml</code>. Without this, Kotlin won't compile at all.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Enable Compose in app/build.gradle.kts</strong>
-        <span>Add <code>buildFeatures { compose = true }</code> inside the <code>android { }</code> block. This activates the Compose compiler.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Add all Compose dependencies to libs.versions.toml</strong>
-        <span>Declare versions and library entries for: Compose BOM, <code>compose-ui</code>, <code>material3</code>, <code>material3-adaptive</code>, <code>lifecycle-viewmodel-compose</code>, <code>navigation-compose</code>, and <code>activity-compose</code>.</span>
-        <pre style="margin-top: 0.6rem;">[versions]
-composeBom         = "2024.09.00"
-lifecycleViewModel = "2.8.7"
-navigationCompose  = "2.8.5"
-activityCompose    = "1.9.3"
+  <!-- ════════════════════════════════════════════ -->
+  <!-- PAGE 2 — Branch Plan                        -->
+  <!-- ════════════════════════════════════════════ -->
+  <div id="page-branches" class="page">
+  <div class="container">
 
-[libraries]
-compose-bom                 = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-compose-ui                  = { group = "androidx.compose.ui", name = "ui" }
-compose-material3           = { group = "androidx.compose.material3", name = "material3" }
-compose-material3-adaptive  = { group = "androidx.compose.material3.adaptive", name = "adaptive" }
-compose-ui-tooling-preview  = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-compose-ui-tooling          = { group = "androidx.compose.ui", name = "ui-tooling" }
-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewModel" }
-navigation-compose          = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
-activity-compose            = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }</pre>
+    <header>
+      <h1>Branch Implementation Plan</h1>
+      <p>Detailed breakdown of every file, property, and method to be written — branch by branch.</p>
+    </header>
+
+    <!-- ── BRANCH 1 ── -->
+    <div class="branch">
+      <div class="branch-header">
+        <div class="branch-number b1">1</div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.1rem;">Cut from develop · PR targets develop</div>
+          <h2><code>feature/data-model</code></h2>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Reference the dependencies in app/build.gradle.kts</strong>
-        <span>Add them to the <code>dependencies { }</code> block, using the BOM to manage Compose versions automatically.</span>
-        <pre style="margin-top: 0.6rem;">implementation(platform(libs.compose.bom))
-implementation(libs.compose.ui)
-implementation(libs.compose.material3)
-implementation(libs.compose.material3.adaptive)
-implementation(libs.compose.ui.tooling.preview)
-debugImplementation(libs.compose.ui.tooling)
-implementation(libs.lifecycle.viewmodel.compose)
-implementation(libs.navigation.compose)
-implementation(libs.activity.compose)</pre>
+
+      <div class="note">Everything else depends on this branch. Merge it before cutting any other branch.</div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">Item.kt</span>
+          <span class="tag tag-noui">No UI</span>
+          <span class="swift-source">← <span>ItemViewModel.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>An immutable data class representing a single item. Replaces the mutable <code>@Observable class ItemViewModel</code> from Swift. Any mutation must use <code>item.copy(...)</code> and replace it in the list.</p>
+          <table>
+            <tr><th>Property</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>id</code></td><td><code>UUID</code></td><td>Defaults to <code>UUID.randomUUID()</code></td></tr>
+            <tr><td><code>creationIndex</code></td><td><code>Int</code></td><td>Tracks insertion order for sort tiebreaks</td></tr>
+            <tr><td><code>name</code></td><td><code>String</code></td><td>The display name of the item</td></tr>
+            <tr><td><code>isFavorite</code></td><td><code>Boolean</code></td><td>Favorite flag</td></tr>
+          </table>
+          <pre>data class Item(
+    val id: UUID = UUID.randomUUID(),
+    val creationIndex: Int,
+    val name: String,
+    val isFavorite: Boolean
+)</pre>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Sync Gradle and verify the project builds clean</strong>
-        <span>In Android Studio: <strong>File → Sync Project with Gradle Files</strong>. Fix any version conflicts before writing any code. A clean build here saves hours of debugging later.</span>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">ItemsListViewModel.kt</span>
+          <span class="tag tag-logic">Business Logic</span>
+          <span class="tag tag-noui">No UI</span>
+          <span class="swift-source">← <span>ItemsListViewModel.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>The single source of truth for the entire app. Extends <code>ViewModel()</code> so it survives screen rotations. Holds the item list as <code>mutableStateListOf&lt;Item&gt;()</code> — Compose observes this and recomposes automatically on any change.</p>
+          <table>
+            <tr><th>Member</th><th>Kind</th><th>Description</th></tr>
+            <tr><td><code>items</code></td><td>State</td><td><code>mutableStateListOf&lt;Item&gt;</code> pre-populated with 3 default animals</td></tr>
+            <tr><td><code>selectedItemId</code></td><td>State</td><td><code>UUID?</code> via <code>mutableStateOf(null)</code> — which item is shown in detail</td></tr>
+            <tr><td><code>nextCreationIndex</code></td><td>Private</td><td>Int that auto-increments on each <code>addItem</code> call</td></tr>
+            <tr><td><code>sortedItems</code></td><td>Computed</td><td>Alphabetical (case-insensitive), tiebroken by <code>creationIndex</code></td></tr>
+            <tr><td><code>selectedItem</code></td><td>Computed</td><td>Looks up the <code>Item</code> matching <code>selectedItemId</code>, or null</td></tr>
+            <tr><td><code>addItem(name)</code></td><td>Method</td><td>Trims whitespace, appends new <code>Item</code>, increments <code>nextCreationIndex</code></td></tr>
+            <tr><td><code>toggleFavorite(item)</code></td><td>Method</td><td>Replaces item with <code>item.copy(isFavorite = !item.isFavorite)</code></td></tr>
+            <tr><td><code>deleteItems(ids)</code></td><td>Method</td><td>Removes items by ID set; resets <code>selectedItemId</code> if it was deleted</td></tr>
+            <tr><td><code>deleteFromDetail(item)</code></td><td>Method</td><td>Removes item and sets <code>selectedItemId = null</code></td></tr>
+          </table>
+          <p><strong>Default items</strong> (companion object): Lupo 🐺 (favorite), Giraffa 🦒, Leone 🦁 — matching the Swift source exactly.</p>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Update MainActivity to use Compose</strong>
-        <span>The generated <code>MainActivity</code> uses the old XML/View system. Replace its body with <code>setContent { }</code> — the Compose entry point. This is where <code>ContentScreen</code> will eventually be called.</span>
-        <pre style="margin-top: 0.6rem;">class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AcademyTest2026Theme {
-                // ContentScreen() will go here
-            }
-        }
+
+      <div class="git-flow">
+        <span class="comment"># Git flow for this branch</span><br>
+        <span class="cmd">git checkout -b feature/data-model</span><br>
+        <span class="comment"># write Item.kt and ItemsListViewModel.kt</span><br>
+        <span class="cmd">git add .</span><br>
+        <span class="cmd">git commit -m "Add Item data class and ItemsListViewModel"</span><br>
+        <span class="cmd">git push origin feature/data-model</span><br>
+        <span class="comment"># open PR on GitHub targeting develop</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── BRANCH 2 ── -->
+    <div class="branch">
+      <div class="branch-header">
+        <div class="branch-number b2">2</div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.1rem;">Cut from develop after Branch 1 is merged · PR targets develop</div>
+          <h2><code>feature/items-list-screen</code></h2>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">FavoriteButton.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>FavoriteButton.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>A reusable composable used in both the list row and the detail screen. Follows state hoisting — receives state, fires a callback, never writes state itself.</p>
+          <table>
+            <tr><th>Parameter</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>isFavorite</code></td><td><code>Boolean</code></td><td>Determines icon and tint</td></tr>
+            <tr><td><code>onToggle</code></td><td><code>() -> Unit</code></td><td>Called when the button is tapped</td></tr>
+          </table>
+          <p><strong>Visuals:</strong> <code>Icons.Filled.Star</code> in yellow when favorite, <code>Icons.Outlined.Star</code> in gray when not. Accessibility label: "Aggiungi ai preferiti" / "Rimuovi dai preferiti".</p>
+          <p><strong>Preview:</strong> Two instances — one favorite, one not.</p>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">ItemRow.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>ItemRowView.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>A single row in the list. Displays the item name and favorite status, with a <code>FavoriteButton</code> on the trailing edge.</p>
+          <table>
+            <tr><th>Parameter</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>item</code></td><td><code>Item</code></td><td>The item to display</td></tr>
+            <tr><td><code>onToggleFavorite</code></td><td><code>() -> Unit</code></td><td>Bubbles up to ViewModel's <code>toggleFavorite</code></td></tr>
+          </table>
+          <p><strong>Layout:</strong> <code>Row</code> with a <code>Column</code> (name in headline style + "Preferito"/"Non preferito" in caption) and a <code>FavoriteButton</code> pushed right with a <code>Spacer</code>.</p>
+          <p><strong>Preview:</strong> Two rows — one favorite, one not — using the default items.</p>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">AddItemSheet.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>AddItemView.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>A <code>ModalBottomSheet</code> for adding a new item. Local state lives inside via <code>remember</code> — no separate ViewModel needed.</p>
+          <table>
+            <tr><th>Parameter</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>onDismiss</code></td><td><code>() -> Unit</code></td><td>Called when the sheet should close</td></tr>
+            <tr><td><code>onSave</code></td><td><code>(String) -> Unit</code></td><td>Called with the trimmed name when Salva is tapped</td></tr>
+          </table>
+          <p><strong>Internal state:</strong> <code>var name by remember { mutableStateOf("") }</code>. <code>canSave</code> is true when <code>name.trim()</code> is not empty.</p>
+          <p><strong>Layout:</strong> Title "Aggiungi", <code>TextField</code> labelled "Nome" (auto-focused, autocapitalize sentences), buttons "Annulla" and "Salva" (disabled when <code>canSave</code> is false).</p>
+          <p><strong>Preview:</strong> Sheet shown open with an empty text field.</p>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">ItemsListScreen.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>ItemsListView.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>The main list screen. Handles two states: empty list and populated list. Owns the boolean state that shows/hides <code>AddItemSheet</code>.</p>
+          <table>
+            <tr><th>Parameter</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>items</code></td><td><code>List&lt;Item&gt;</code></td><td>The sorted list from <code>ItemsListViewModel.sortedItems</code></td></tr>
+            <tr><td><code>selectedItemId</code></td><td><code>UUID?</code></td><td>Currently selected item</td></tr>
+            <tr><td><code>onItemClick</code></td><td><code>(UUID) -> Unit</code></td><td>Sets <code>selectedItemId</code> in the ViewModel</td></tr>
+            <tr><td><code>onToggleFavorite</code></td><td><code>(Item) -> Unit</code></td><td>Calls ViewModel's <code>toggleFavorite</code></td></tr>
+            <tr><td><code>onDeleteItem</code></td><td><code>(Item) -> Unit</code></td><td>Called after swipe-to-delete completes</td></tr>
+            <tr><td><code>onAddItem</code></td><td><code>(String) -> Unit</code></td><td>Calls ViewModel's <code>addItem</code></td></tr>
+          </table>
+          <p><strong>Empty state:</strong> Centered message — "Nessun oggetto", tray icon, "Aggiungi un oggetto dalla barra in alto" + "Aggiungi oggetto" button.</p>
+          <p><strong>List:</strong> <code>LazyColumn</code> with each row wrapped in <code>SwipeToDismissBox</code>. Swipe reveals a red delete background; completing the gesture calls <code>onDeleteItem</code>.</p>
+          <p><strong>TopAppBar:</strong> Title "Oggetti", trailing <code>+</code> <code>IconButton</code> sets local <code>showAddSheet = true</code>.</p>
+          <p><strong>Preview:</strong> Two versions — one with items, one empty.</p>
+        </div>
+      </div>
+
+      <div class="git-flow">
+        <span class="comment"># Git flow for this branch</span><br>
+        <span class="cmd">git checkout develop &amp;&amp; git pull</span><br>
+        <span class="cmd">git checkout -b feature/items-list-screen</span><br>
+        <span class="comment"># write FavoriteButton.kt, ItemRow.kt, AddItemSheet.kt, ItemsListScreen.kt</span><br>
+        <span class="cmd">git add .</span><br>
+        <span class="cmd">git commit -m "Add items list screen and sub-components"</span><br>
+        <span class="cmd">git push origin feature/items-list-screen</span><br>
+        <span class="comment"># open PR on GitHub targeting develop</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── BRANCH 3 ── -->
+    <div class="branch">
+      <div class="branch-header">
+        <div class="branch-number b3">3</div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.1rem;">Cut from develop after Branch 1 is merged · PR targets develop</div>
+          <h2><code>feature/item-detail-screen</code></h2>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">ItemDetailScreen.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>ItemDetailView.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>The detail view shown when an item is selected. Can be developed in parallel with Branch 2 — both depend only on <code>Item</code> from Branch 1.</p>
+          <table>
+            <tr><th>Parameter</th><th>Type</th><th>Notes</th></tr>
+            <tr><td><code>item</code></td><td><code>Item</code></td><td>The item to display</td></tr>
+            <tr><td><code>onToggleFavorite</code></td><td><code>() -> Unit</code></td><td>Calls ViewModel's <code>toggleFavorite</code></td></tr>
+            <tr><td><code>onDelete</code></td><td><code>() -> Unit</code></td><td>Calls ViewModel's <code>deleteFromDetail</code></td></tr>
+          </table>
+          <p><strong>TopAppBar:</strong> Title = item name. Trailing: trash <code>IconButton</code> in error/red color. Accessibility label: "Elimina oggetto".</p>
+          <p><strong>Body:</strong> <code>Column</code> with two rows — "Nome" + item name value, and "Preferito" + <code>FavoriteButton</code>. Mirrors Swift's <code>Form / Section("Oggetto")</code>.</p>
+          <p><strong>Empty state:</strong> When no item is selected, show "Nessun oggetto", tray icon, "Aggiungi un oggetto dalla lista."</p>
+          <p><strong>Preview:</strong> Sample item with name "Álgebra", <code>isFavorite = false</code> — matching the Swift preview exactly.</p>
+        </div>
+      </div>
+
+      <div class="git-flow">
+        <span class="comment"># Git flow for this branch</span><br>
+        <span class="cmd">git checkout develop &amp;&amp; git pull</span><br>
+        <span class="cmd">git checkout -b feature/item-detail-screen</span><br>
+        <span class="comment"># write ItemDetailScreen.kt</span><br>
+        <span class="cmd">git add .</span><br>
+        <span class="cmd">git commit -m "Add item detail screen"</span><br>
+        <span class="cmd">git push origin feature/item-detail-screen</span><br>
+        <span class="comment"># open PR on GitHub targeting develop</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── BRANCH 4 ── -->
+    <div class="branch">
+      <div class="branch-header">
+        <div class="branch-number b4">4</div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.1rem;">Cut from develop after Branches 1, 2, 3 are merged · PR targets develop</div>
+          <h2><code>feature/navigation</code></h2>
+        </div>
+      </div>
+
+      <div class="note">This is the final branch. All screens must be merged into develop before cutting this one.</div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">ContentScreen.kt</span>
+          <span class="tag tag-preview">@Preview</span>
+          <span class="swift-source">← <span>ContentView.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>The root composable. The only place where <code>ItemsListViewModel</code> is instantiated (via <code>viewModel()</code>). Wires all screens together and handles navigation.</p>
+          <table>
+            <tr><th>Member</th><th>Kind</th><th>Description</th></tr>
+            <tr><td><code>viewModel</code></td><td>Local</td><td>Created with <code>viewModel&lt;ItemsListViewModel&gt;()</code> — survives recomposition</td></tr>
+            <tr><td><code>sortedItems</code></td><td>Derived</td><td>Read from <code>viewModel.sortedItems</code></td></tr>
+            <tr><td><code>selectedItem</code></td><td>Derived</td><td>Read from <code>viewModel.selectedItem</code></td></tr>
+          </table>
+          <p><strong>Layout:</strong> <code>NavigationSuiteScaffold</code> — left pane: <code>ItemsListScreen</code>, right pane: <code>ItemDetailScreen</code> (or empty state if <code>selectedItem</code> is null). Collapses to a single-stack layout on phones automatically.</p>
+          <p><strong>All ViewModel callbacks wired here:</strong> <code>onItemClick</code>, <code>onToggleFavorite</code>, <code>onDeleteItem</code>, <code>onAddItem</code>, <code>onDelete</code> (from detail).</p>
+          <p><strong>Preview:</strong> <code>ContentScreen()</code> with default data.</p>
+        </div>
+      </div>
+
+      <div class="file-card">
+        <div class="file-header">
+          <span class="filename">MainActivity.kt</span>
+          <span class="swift-source">← <span>AcademyTestApp.swift</span></span>
+        </div>
+        <div class="file-body">
+          <p>Updated to replace the placeholder <code>Greeting</code> composable with <code>ContentScreen()</code>. The app's single entry point.</p>
+          <pre>setContent {
+    AcademyTest2026Theme {
+        ContentScreen()
     }
 }</pre>
+          <p>The <code>Greeting</code> function and its <code>@Preview</code> are removed — they were generated placeholders only.</p>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Create the package folder structure</strong>
-        <span>Inside <code>app/src/main/java/com/example/academytest2026/</code>, create two sub-packages: <code>model/</code> for data classes and <code>ui/</code> for all composables and ViewModels.</span>
-      </div>
-    </li>
-  </ol>
 
-  <!-- ── Build Order ── -->
-  <h2>🏗 Phase 2 — Build Order (file by file)</h2>
-  <ol class="steps">
-    <li>
-      <div class="step-body">
-        <strong>Item.kt</strong>
-        <span>The data class. No UI — just pure Kotlin. Verify it compiles.</span>
+      <div class="git-flow">
+        <span class="comment"># Git flow for this branch</span><br>
+        <span class="cmd">git checkout develop &amp;&amp; git pull</span><br>
+        <span class="cmd">git checkout -b feature/navigation</span><br>
+        <span class="comment"># write ContentScreen.kt, update MainActivity.kt</span><br>
+        <span class="comment"># run the app on emulator/device to verify end-to-end</span><br>
+        <span class="cmd">git add .</span><br>
+        <span class="cmd">git commit -m "Add navigation and wire all screens together"</span><br>
+        <span class="cmd">git push origin feature/navigation</span><br>
+        <span class="comment"># open final PR on GitHub targeting develop</span>
       </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>ItemsListViewModel.kt</strong>
-        <span>All business logic: add, delete, toggle, sort. Still no UI.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>FavoriteButton.kt</strong>
-        <span>Smallest composable. Good first test of Compose + <code>@Preview</code>.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>ItemRow.kt</strong>
-        <span>Row layout with name, subtitle, and FavoriteButton. Add a <code>@Preview</code> with sample data.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>AddItemSheet.kt</strong>
-        <span><code>ModalBottomSheet</code> with <code>TextField</code>, Annulla and Salva buttons. Auto-focus the text field on appear.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>ItemsListScreen.kt</strong>
-        <span><code>LazyColumn</code> + <code>SwipeToDismissBox</code> + <code>TopAppBar</code> with <code>+</code> button + empty state composable.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>ItemDetailScreen.kt</strong>
-        <span>Detail layout with <code>TopAppBar</code> delete action and <code>FavoriteButton</code>.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>ContentScreen.kt</strong>
-        <span>Wire everything together with <code>NavigationSuiteScaffold</code>. Plug in <code>ItemsListViewModel</code> here as the single source of truth.</span>
-      </div>
-    </li>
-    <li>
-      <div class="step-body">
-        <strong>Wire ContentScreen into MainActivity + run the app</strong>
-        <span>Replace the placeholder in <code>setContent { }</code> with <code>ContentScreen()</code>. Launch on emulator or device and verify all features work end-to-end.</span>
-      </div>
-    </li>
-  </ol>
+    </div>
 
-</div>
+  </div>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      document.querySelectorAll('.tab-bar .tab-btn').forEach(b => {
+        if (b.getAttribute('onclick') === "showPage('" + id + "')") {
+          b.classList.add('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
 </body>
 </html>
