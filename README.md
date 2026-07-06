@@ -6,9 +6,9 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 
 ## Screenshots
 
-| List | Empty State | Detail |
-|---|---|---|
-| ![Item list](assets/ContentScreenPreview.png) | ![Empty state](assets/ItemListScreenEmptyPreview.png) | ![Item detail](assets/ItemsDetailScreenPreview.png) |
+| List | Add Item | Detail | Empty State |
+|---|---|---|---|
+| ![Item list](assets/ItemListScreen.png) | ![Add item](assets/AddItemSheet.png) | ![Item detail](assets/ItemDetailScreen.png) | ![Empty state](assets/ItemListEmpty.png) |
 
 ---
 
