@@ -8,25 +8,12 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 
 Each screen shown as **iOS (SwiftUI) → Android (Compose)**:
 
-**Item List**
-| iOS | Android |
-|---|---|
-| ![Item list iOS](assets/iOS/ItemListScreenSwift.png) | ![Item list Android](assets/android/ItemListScreen.png) |
-
-**Add Item**
-| iOS | Android |
-|---|---|
-| ![Add item iOS](assets/iOS/AddItemSheetSwift.png) | ![Add item Android](assets/android/AddItemSheet.png) |
-
-**Item Detail**
-| iOS | Android |
-|---|---|
-| ![Item detail iOS](assets/iOS/ItemDetailScreenSwift.png) | ![Item detail Android](assets/android/ItemDetailScreen.png) |
-
-**Empty State**
-| iOS | Android |
-|---|---|
-| ![Empty state iOS](assets/iOS/ItemListEmptySwift.png) | ![Empty state Android](assets/android/ItemListEmpty.png) |
+| Screen | iOS | Android |
+|---|---|---|
+| **Item List** | <img src="assets/iOS/ItemListScreenSwift.png" width="220"/> | <img src="assets/android/ItemListScreen.png" width="220"/> |
+| **Add Item** | <img src="assets/iOS/AddItemSheetSwift.png" width="220"/> | <img src="assets/android/AddItemSheet.png" width="220"/> |
+| **Item Detail** | <img src="assets/iOS/ItemDetailScreenSwift.png" width="220"/> | <img src="assets/android/ItemDetailScreen.png" width="220"/> |
+| **Empty State** | <img src="assets/iOS/ItemListEmptySwift.png" width="220"/> | <img src="assets/android/ItemListEmpty.png" width="220"/> |
 
 ---
 

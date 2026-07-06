@@ -93,3 +93,12 @@ iOSInjectionProject/
 
 # Xcode workspace (auto-generated)
 **/*.xcworkspace/
+
+# Android / Android Studio
+.idea/
+*.iml
+local.properties
+**/.gradle/
+**/build/
+**/captures/
+**/lint.xml
