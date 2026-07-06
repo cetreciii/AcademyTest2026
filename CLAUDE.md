@@ -77,8 +77,8 @@ ui/
   AddItemSheet.kt            — ModalBottomSheet for adding items
   ItemRow.kt                 — single list row composable
   FavoriteButton.kt          — reusable star toggle composable
-  ItemDetailScreen.kt        — detail view (pending: feature/item-detail-screen)
-  ContentScreen.kt           — root screen, owns the ViewModel (pending: feature/navigation)
+  ItemDetailScreen.kt        — detail view with TopAppBar, Card-based form, delete action
+  ContentScreen.kt           — root screen, owns the ViewModel, NavHost entry point
   theme/                     — generated Material3 theme
 ```
 
@@ -92,7 +92,7 @@ ui/
 |---|---|
 | `@Observable class ItemViewModel` | `data class Item` + `mutableStateListOf` |
 | `@Bindable` two-way binding | state hoisting: value down, `onXxx: () -> Unit` lambda up |
-| `NavigationSplitView` | `NavigationSuiteScaffold` (adaptive) |
+| `NavigationSplitView` | `NavHost` with `"list"` and `"detail"` destinations |
 | `.sheet(item:)` | `ModalBottomSheet` gated by a `Boolean` state |
 | `List + .onDelete` | `LazyColumn + SwipeToDismissBox` |
 | `ContentUnavailableView` | custom empty-state composable |
