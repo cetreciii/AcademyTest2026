@@ -124,3 +124,6 @@ AcademyTest2026/
 | `production` | Stable releases only |
 | `develop` | Default working branch |
 | `feature/*` | One branch per screen/feature, merged to `develop` via PR |
+
+---
+> *That's my effort in translating a Swift app into a Kotlin app. It has been an interesting and stimulating hot neapolitan july afternoon since I took this occasion to practice more my developer skills! With this exercise I also had the opportunity to deep dive into Android coding and learn more how the structure, logic and syntax of it is different from Swift. Very nice evening, overall. Thank you! ❤️*
