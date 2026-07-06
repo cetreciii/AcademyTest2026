@@ -4,6 +4,18 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 
 ---
 
+## Table of Contents
+
+- [Screenshots](#screenshots)
+- [What this repository is](#what-this-repository-is)
+- [The App](#the-app)
+- [Swift → Kotlin Translation](#swift--kotlin-translation)
+- [Repository Structure](#repository-structure)
+- [Running the Apps](#running-the-apps)
+- [Branch Strategy](#branch-strategy)
+
+---
+
 ## Screenshots
 
 Each screen shown as **iOS (SwiftUI) → Android (Compose)**:
