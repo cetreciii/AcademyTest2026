@@ -13,6 +13,7 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 - [Repository Structure](#repository-structure)
 - [Running the Apps](#running-the-apps)
 - [Branch Strategy](#branch-strategy)
+- [How AI Fit Into the Workflow](#how-ai-fit-into-the-workflow)
 
 ---
 
@@ -149,6 +150,28 @@ AcademyTest2026/
 | `production` | Stable releases only |
 | `develop` | Default working branch |
 | `feature/*` | One branch per screen/feature, merged to `develop` via PR |
+
+---
+
+## How AI Fit Into the Workflow
+
+I used **Claude Code** as a working partner throughout this project to close the gap between a language I know well (Swift) and one I had little experience with (Kotlin). And to help me generate code.
+
+**1. Setup.** I started by creating the repository and a solid `.gitignore` covering both Swift and Kotlin build artifacts, so the project was clean from the beginning.
+
+**2. Learning before coding.** Before writing any Kotlin, I asked Claude Code to walk me through how the *same app* would need to be structured differently in Kotlin/Compose versus Swift/SwiftUI. This mattered more to me than getting working code fast: since I have limited Android experience, I treated this as a genuine learning opportunity to understand *what I was about to face*. Expanding my own knowledge was the priority during this task.
+
+**3. Analyzing the source app first.** Before porting anything, I also asked Claude to analyze the Swift codebase itself and point out any weak points, strange patterns, fragile logic, anything not worth carrying over Kotlin. The goal was to avoid translating a weakness from Swift into Kotlin. **That's how i found out the accented letters weakness when ordering the items in alphabetical order!**
+
+**4. Planning before building.** Once I understood the main syntax and architectural differences, I worked with AI to draft a detailed implementation plan. I made sure to stay heavily involved in shaping it, being as precise as possible about the architecture and the steps I envisioned. This is also why I enforced a strict `feature` → `develop` → `production` branch discipline: the goal was broad, so I wanted to break it into small, one-problem-at-a-time, achievable milestones.
+
+**5. Guided implementation.** With the plan in hand, I built the Kotlin project step by step, following it closely. Coding in a language I am not proficient in became far more manageable thanks to that plan and to Claude Code's assistance along the way. I kept `CLAUDE.md` updated after each work session, so the project's context and conventions stayed accurate for future sessions. Consider the usage of AI as a coding and learning partner: someone I can always ask something that will always answer and teach me.
+
+**6. Documentation.** Finally, AI helped me summarize the finished work into this README, aiming for something clear, accurate, and understandable even to a complete beginner.
+
+### What this project deliberately does *not* cover
+
+This is a small learning project, not production software, even tho I made a "production" branch, but it was to simulate a team's work. **I did not run any security review, did not check for memory leaks, did not write unit tests, and did not scan the code for bugs or weaknesses.** That was a conscious choice: my goal here was to learn how to transpose Swift logic into Kotlin logic, in a language I am not yet proficient in. Everything in this repository should be read through that lens.
 
 ---
 > *That's my effort in translating a Swift app into a Kotlin app. It has been an interesting and stimulating hot neapolitan july afternoon since I took this occasion to practice more my developer skills! With this exercise I also had the opportunity to deep dive into Android coding and learn more how the structure, logic and syntax of it is different from Swift. Very nice evening, overall. Thank you! ❤️*
