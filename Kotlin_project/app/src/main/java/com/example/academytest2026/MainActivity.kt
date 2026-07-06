@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.Composable
+import com.example.academytest2026.ui.ItemsListScreen
+import com.example.academytest2026.ui.ItemsListViewModel
 import com.example.academytest2026.ui.theme.AcademyTest2026Theme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +20,37 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AcademyTest2026Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                // ContentScreen() will replace this in feature/navigation
+                val viewModel = remember { ItemsListViewModel() }
+                var selectedItemId by remember { mutableStateOf(viewModel.selectedItemId) }
+
+                ItemsListScreen(
+                    items = viewModel.sortedItems,
+                    selectedItemId = selectedItemId,
+                    onItemClick = { id ->
+                        viewModel.selectItem(id)
+                        selectedItemId = viewModel.selectedItemId
+                    },
+                    onToggleFavorite = { item -> viewModel.toggleFavorite(item) },
+                    onDeleteItem = { item -> viewModel.deleteItems(setOf(item.id)) },
+                    onAddItem = { name -> viewModel.addItem(name) }
+                )
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+private fun AppPreview() {
     AcademyTest2026Theme {
-        Greeting("Android")
+        ItemsListScreen(
+            items = ItemsListViewModel.defaultItems,
+            selectedItemId = null,
+            onItemClick = {},
+            onToggleFavorite = {},
+            onDeleteItem = {},
+            onAddItem = {}
+        )
     }
 }
