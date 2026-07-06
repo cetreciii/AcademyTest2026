@@ -86,3 +86,9 @@ fastlane/test_output
 iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/swift
+
+# macOS
+.DS_Store
+
+# Xcode workspace (auto-generated)
+*.xcworkspace/
