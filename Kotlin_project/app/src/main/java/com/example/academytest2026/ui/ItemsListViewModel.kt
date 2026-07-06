@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.example.academytest2026.model.Item
+import java.text.Collator
+import java.util.Locale
 import java.util.UUID
 
 class ItemsListViewModel : ViewModel() {
@@ -17,9 +19,13 @@ class ItemsListViewModel : ViewModel() {
 
     private var nextCreationIndex = defaultItems.maxOf { it.creationIndex } + 1
 
+    private val nameCollator: Collator = Collator.getInstance(Locale.ITALIAN).apply {
+        strength = Collator.SECONDARY
+    }
+
     val sortedItems: List<Item>
         get() = items.sortedWith(
-            compareBy<Item> { it.name.lowercase() }
+            compareBy<Item, String>(nameCollator) { it.name }
                 .thenBy { it.creationIndex }
         )
 
