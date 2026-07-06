@@ -73,12 +73,12 @@ model/
   Item.kt                    — immutable data class
 ui/
   ItemsListViewModel.kt      — single source of truth (ViewModel)
-  ContentScreen.kt           — root screen, owns the ViewModel (pending)
   ItemsListScreen.kt         — LazyColumn list with swipe-to-delete
-  ItemDetailScreen.kt        — detail view (pending)
   AddItemSheet.kt            — ModalBottomSheet for adding items
   ItemRow.kt                 — single list row composable
   FavoriteButton.kt          — reusable star toggle composable
+  ItemDetailScreen.kt        — detail view (pending: feature/item-detail-screen)
+  ContentScreen.kt           — root screen, owns the ViewModel (pending: feature/navigation)
   theme/                     — generated Material3 theme
 ```
 
