@@ -4,6 +4,14 @@ A hands-on exercise in **translating a SwiftUI iOS app into Kotlin + Jetpack Com
 
 ---
 
+## Screenshots
+
+| List | Empty State | Detail |
+|---|---|---|
+| ![Item list](assets/ContentScreenPreview.png) | ![Empty state](assets/ItemListScreenEmptyPreview.png) | ![Item detail](assets/ItemsDetailScreenPreview.png) |
+
+---
+
 ## What this repository is
 
 The repo contains two complete, working apps that do the same thing:
